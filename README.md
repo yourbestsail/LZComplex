@@ -1,5 +1,7 @@
 # The LZComplex package handles the math of complex numbers.
 
+[![N|Solid](https://apps.yourbestsail-science.com/logo/logo.png)](https://nodesource.com/products/nsolid)
+
 ```
 var c = LZComplex(re: 2, im: 4)
 print(c) // gives 2 + 4i
