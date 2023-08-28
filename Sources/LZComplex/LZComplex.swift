@@ -220,7 +220,7 @@ public extension LZComplex {
 }
 
 // MARK: - EXTENSION TO TEXT VIEW
-extension Text {
+public extension Text {
     init(_ c: LZComplex) {
         self.init(verbatim: "\(c)")
     }
