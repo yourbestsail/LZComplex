@@ -8,5 +8,8 @@ final class LZComplexTests: XCTestCase {
 
         // Defining Test Cases and Test Methods
         // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
+        
+        let c: LZComplex = LZComplex(re: 2, im: 4)
+        print(c)
     }
 }
