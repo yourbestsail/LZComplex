@@ -128,7 +128,7 @@ public extension Double {
 }
 
 // MARK: - GLOBAL COMPLEX FUNCTIONS
-func Double(_ c: LZComplex) -> Double? {
+public func Double(_ c: LZComplex) -> Double? {
     guard c.im == 0 else {return nil}
     return c.re
 }
@@ -141,14 +141,14 @@ private func mod(_ c: LZComplex) -> Double {
     return sqrt(pow(c.re,2) + pow(c.im,2))
 }
 
-func abs(_ c: LZComplex) -> Double {
+public func abs(_ c: LZComplex) -> Double {
     return mod(c)
 }
 
-func sqrt(_ c: LZComplex) -> LZComplex {
+public func sqrt(_ c: LZComplex) -> LZComplex {
     return c^0.5
 }
-func log(_ c: LZComplex) -> LZComplex {
+public func log(_ c: LZComplex) -> LZComplex {
     return LZComplex(re: log(c.rho), im: c.theta)
 }
 
