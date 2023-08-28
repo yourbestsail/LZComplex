@@ -1,7 +1,12 @@
-## The LZComplex package handles the math of complex numbers.
+# The LZComplex package handles the math of complex numbers.
+### by Luca Zapparoli
 
+[![N|Solid](https://apps.yourbestsail-science.com/logo/logo9.png)](https://www.yourbestsail-science.com)
+
+```
 var c = LZComplex(re: 2, im: 4)
 print(c) // gives 2 + 4i
+```
 
 ## List of operations:
 
