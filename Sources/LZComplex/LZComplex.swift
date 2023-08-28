@@ -123,12 +123,10 @@ public struct LZComplex: CustomStringConvertible, Equatable  {
     
 }
 
-public extension Double {
-    
-}
+
 
 // MARK: - GLOBAL COMPLEX FUNCTIONS
-public func Double(_ c: LZComplex) -> Double? {
+public func toDouble(_ c: LZComplex) -> Double? {
     guard c.im == 0 else {return nil}
     return c.re
 }
@@ -137,18 +135,14 @@ private func coniugate(_ c: LZComplex) -> LZComplex {
     return LZComplex(re: c.re, im: -c.im)
 }
 
-private func mod(_ c: LZComplex) -> Double {
+public func modulus(_ c: LZComplex) -> Double {
     return sqrt(pow(c.re,2) + pow(c.im,2))
 }
 
-public func abs(_ c: LZComplex) -> Double {
-    return mod(c)
-}
-
-public func sqrt(_ c: LZComplex) -> LZComplex {
+public func sqRoot(_ c: LZComplex) -> LZComplex {
     return c^0.5
 }
-public func log(_ c: LZComplex) -> LZComplex {
+public func ln(_ c: LZComplex) -> LZComplex {
     return LZComplex(re: log(c.rho), im: c.theta)
 }
 

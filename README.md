@@ -8,7 +8,7 @@ print(c) // gives 2 + 4i
 | Operation | Result |
 | ------ | ------ |
 | c** | the square of c |
-| log(c) | natural log of c |
+| ln(c) | natural log of c |
 | c^3 | power 3 of c |
 | c1^c2 | powr c2 of c1 |
 | c1 + c2 | addition |
@@ -16,8 +16,9 @@ print(c) // gives 2 + 4i
 | c1 * c2 | multiplication |
 | c1 / c2 | division |
 | -c1 | negative |
-| abs(c) | modulus of c |
-| sqrt(c) | root square of c |
+| modulus(c) | modulus of c |
+| sqRoot(c) | root square of c |
+| toDouble(c) | type casting to Double? (optional) |
 | c* | coniugate of c |
 | c1 += c2 | c1 = c1 + c2 |
 | c1 -= c2 | c1 = c1 - c2 |
