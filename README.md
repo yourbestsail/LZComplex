@@ -1,7 +1,9 @@
 ## The LZComplex package handles the math of complex numbers.
 
+```
 var c = LZComplex(re: 2, im: 4)
 print(c) // gives 2 + 4i
+```
 
 ## List of operations:
 
