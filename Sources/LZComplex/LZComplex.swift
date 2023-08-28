@@ -33,33 +33,33 @@ import Foundation
 /// 16. c1 /= c2 // c1 = c1 / c2
 /// ```
 
-struct LZComplex: CustomStringConvertible, Equatable  {
+public struct LZComplex: CustomStringConvertible, Equatable  {
     
     private var real: Double
     private var imaginary: Double
     
-    init() {
+    public init() {
         self.init(re:0,im:0)
     }
     
-    init(_ re:Double) {
+    public init(_ re:Double) {
         self.init(re: re, im: 0)
     }
     
-    init(im: Double) {
+    public init(im: Double) {
         self.init(re: 0, im: im)
     }
     
-    init(rho: Double, theta: Double) {
+    public init(rho: Double, theta: Double) {
         self.init(re: rho * cos(theta), im: rho * sin(theta))
     }
 
-    init(re: Double, im: Double) {
+    public init(re: Double, im: Double) {
         self.real = re
         self.imaginary = im
     } // Designated initializer
     
-    var description: String {
+    public var description: String {
         
         var sign = "+"
         if real == 0 && imaginary != 0 {
@@ -78,7 +78,7 @@ struct LZComplex: CustomStringConvertible, Equatable  {
         return "\(real) \(sign) \(abs(imaginary))i"
     }
     
-    var re: Double {
+    public var re: Double {
         get {
           return real
         }
@@ -88,7 +88,7 @@ struct LZComplex: CustomStringConvertible, Equatable  {
         }
     }
     
-    var im: Double {
+    public var im: Double {
         get {
           return imaginary
         }
@@ -97,7 +97,7 @@ struct LZComplex: CustomStringConvertible, Equatable  {
         }
     }
     
-    var rho: Double {
+    public var rho: Double {
         get {
             return sqrt(pow(real, 2)+pow(imaginary,2))
         }
@@ -108,7 +108,7 @@ struct LZComplex: CustomStringConvertible, Equatable  {
         }
     }
     
-    var theta: Double {
+    public var theta: Double {
         get {
             return atan2(imaginary,real)
         }
@@ -123,7 +123,9 @@ struct LZComplex: CustomStringConvertible, Equatable  {
     
 }
 
-
+public extension Double {
+    
+}
 
 // MARK: - GLOBAL COMPLEX FUNCTIONS
 func Double(_ c: LZComplex) -> Double? {
@@ -154,21 +156,21 @@ func log(_ c: LZComplex) -> LZComplex {
 infix operator ^: BitwiseShiftPrecedence
 postfix operator **
 postfix operator *
-extension LZComplex {
+public extension LZComplex {
     
     static func + (left: LZComplex, right: LZComplex) -> LZComplex {
         return LZComplex(re: left.re + right.re, im: left.im + right.im)
     }
     
-    static func - (left: LZComplex, right: LZComplex) -> LZComplex {
+   static func - (left: LZComplex, right: LZComplex) -> LZComplex {
         return LZComplex(re: left.re - right.re, im: left.im - right.im)
     }
     
-    static prefix func - (complex: LZComplex) -> LZComplex {
+   static prefix func - (complex: LZComplex) -> LZComplex {
         return LZComplex(re: -complex.re, im: -complex.im)
     }
     
-    static func += (left: inout LZComplex, right: LZComplex) {
+   static func += (left: inout LZComplex, right: LZComplex) {
         left = left + right
     }
     
