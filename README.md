@@ -1,4 +1,4 @@
-## The LZComplex package handles the math of complex numbers.
+# The LZComplex package handles the math of complex numbers.
 
 ```
 var c = LZComplex(re: 2, im: 4)
