@@ -5,7 +5,7 @@
 //  Created by Luca Zapparoli on 28/8/23.
 //
 
-import Foundation
+import SwiftUI
 
 /// The struct LZComplex, together with the global funtions defined in the package and the LZComplex extension where the most important operators are overloaded, handles the math of complex numbers.
 /// ```
@@ -217,5 +217,12 @@ public extension LZComplex {
         }
     
     
+}
+
+// MARK: - EXTENSION TO TEXT VIEW
+extension Text {
+    init(_ c: LZComplex) {
+        self.init(verbatim: "\(c)")
+    }
 }
 
