@@ -5,7 +5,7 @@
 
 ```
 var c = LZComplex(re: 2, im: 4)
-print(c) // gives 2 + 4i
+print(c) // 2 + 4i
 ```
 
 ## List of operations:
