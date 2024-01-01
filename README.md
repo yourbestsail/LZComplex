@@ -3,7 +3,7 @@
 
 [![N|Solid](https://apps.yourbestsail-science.com/logo/logo9.png)](https://www.yourbestsail-science.com)
 
-```
+```swift
 var c = LZComplex(re: 2, im: 4)
 print(c) // 2 + 4i
 ```
