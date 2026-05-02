@@ -142,10 +142,30 @@ public func modulus(_ c: LZComplex) -> Double {
 public func sqRoot(_ c: LZComplex) -> LZComplex {
     return c^0.5
 }
+
+/// Returns the principal natural logarithm of a complex number.
+///
+/// For a complex number `z = rho * e^(i * theta)`, this function returns
+/// `ln(z) = ln(rho) + i * theta`, where `theta` is the principal argument
+/// returned by `atan2`, normally in the interval `[-pi, pi]`.
+///
+/// - Important: The complex logarithm is multi-valued in theory. This function
+///   returns only the principal value.
+/// - Note: `ln(0)` is mathematically undefined. Since this type is based on
+///   `Double`, calling `ln(LZComplex())` follows IEEE floating-point behavior
+///   and produces a real part of negative infinity.
 public func ln(_ c: LZComplex) -> LZComplex {
     return LZComplex(re: log(c.rho), im: c.theta)
 }
 
+/// Returns the complex exponential of a complex number.
+///
+/// For `z = a + bi`, the complex exponential is:
+///
+/// `exp(z) = e^a * (cos(b) + i * sin(b))`
+///
+/// This is the inverse operation of the principal complex logarithm for values
+/// where the principal branch is applicable.
 public func exp(_ c: LZComplex) -> LZComplex {
     let magnitude = Foundation.exp(c.re)
     return LZComplex(re: magnitude * cos(c.im), im: magnitude * sin(c.im))
@@ -195,6 +215,19 @@ public extension LZComplex {
     }
     
    
+    /// Raises a complex number to an integer power.
+    ///
+    /// This overload implements repeated multiplication for integer exponents:
+    ///
+    /// - `base ^ 0` returns `1 + 0i`.
+    /// - `base ^ 1` returns `base`.
+    /// - `base ^ n`, for `n > 1`, returns `base` multiplied by itself `n` times.
+    /// - `base ^ -n`, for `n > 0`, returns `1 / (base ^ n)`.
+    ///
+    /// - Important: `0 ^ 0` returns `1 + 0i`, following the common programming
+    ///   convention for exponentiation identities. Negative powers of zero follow
+    ///   the existing division behavior of this library and may produce infinite
+    ///   or NaN `Double` values.
     static func ^ (base: LZComplex, power: Int) -> LZComplex {
         if power == 0 {
             return LZComplex(1)
@@ -219,13 +252,42 @@ public extension LZComplex {
         return coniugate(c)
     }
     
+    /// Raises a complex number to a real `Double` power.
+    ///
+    /// This overload uses the polar representation of the base:
+    ///
+    /// `z = rho * e^(i * theta)`
+    ///
+    /// and computes:
+    ///
+    /// `z^p = rho^p * e^(i * p * theta)`
+    ///
+    /// where `theta` is the principal argument of the base.
+    ///
+    /// - Important: For non-integer powers, complex exponentiation is generally
+    ///   multi-valued. This overload returns the principal value only.
+    /// - Note: For integer exponents, prefer the `Int` overload because it gives
+    ///   exact exponentiation by repeated multiplication and avoids branch-cut
+    ///   surprises.
     static func ^ (base: LZComplex, power: Double) -> LZComplex {
             let magnitude = pow(base.re * base.re + base.im * base.im, power / 2)
             let angle = atan2(base.im, base.re) * power
             return LZComplex(re: magnitude * cos(angle), im: magnitude * sin(angle))
         }
     
-    /// Returns the principal value of base raised to a complex power.
+    /// Raises a complex number to a complex power.
+    ///
+    /// This overload computes the principal value using:
+    ///
+    /// `base ^ power = exp(power * ln(base))`
+    ///
+    /// where `ln(base)` is the principal complex logarithm.
+    ///
+    /// - Important: Complex exponentiation is multi-valued in theory because the
+    ///   complex logarithm is multi-valued. This overload returns only the
+    ///   principal value.
+    /// - Note: If `base` is zero, the result follows the IEEE floating-point
+    ///   behavior produced by `ln(0)` and the subsequent arithmetic operations.
     static func ^ (base: LZComplex, power: LZComplex) -> LZComplex {
             return exp(power * ln(base))
         }
