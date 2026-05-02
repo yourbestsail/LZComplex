@@ -146,6 +146,11 @@ public func ln(_ c: LZComplex) -> LZComplex {
     return LZComplex(re: log(c.rho), im: c.theta)
 }
 
+public func exp(_ c: LZComplex) -> LZComplex {
+    let magnitude = Foundation.exp(c.re)
+    return LZComplex(re: magnitude * cos(c.im), im: magnitude * sin(c.im))
+}
+
 // MARK: - OPERATORS
 infix operator ^: BitwiseShiftPrecedence
 postfix operator **
@@ -191,11 +196,19 @@ public extension LZComplex {
     
    
     static func ^ (base: LZComplex, power: Int) -> LZComplex {
-        var b = base
-            for _ in 2...power {
-                b *= b
-            }
-        return b
+        if power == 0 {
+            return LZComplex(1)
+        }
+        
+        if power < 0 {
+            return LZComplex(1) / (base ^ abs(power))
+        }
+        
+        var result = LZComplex(1)
+        for _ in 0..<power {
+            result *= base
+        }
+        return result
     }
     
     static postfix func ** (c: LZComplex) -> LZComplex {
@@ -212,8 +225,9 @@ public extension LZComplex {
             return LZComplex(re: magnitude * cos(angle), im: magnitude * sin(angle))
         }
     
+    /// Returns the principal value of base raised to a complex power.
     static func ^ (base: LZComplex, power: LZComplex) -> LZComplex {
-            return LZComplex()
+            return exp(power * ln(base))
         }
     
     
